@@ -13,6 +13,16 @@ const Button = styled.button`
   margin: auto;
   margin-top: 15px;
 `;
+
+const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+`;
+
+const Input = styled.input`
+  margin-top: 15px;
+`;
 class App extends Component {
   state = {
     contacts: [
@@ -22,6 +32,7 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     name: '',
+    number: '',
   };
 
   nameInputId = shortid.generate();
@@ -34,7 +45,14 @@ class App extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.setState(({ contacts }) => ({
-      contacts: [...contacts, { id: this.nameInputId, name: this.state.name }],
+      contacts: [
+        ...contacts,
+        {
+          id: this.nameInputId,
+          name: this.state.name,
+          number: this.state.number,
+        },
+      ],
     }));
     this.reset();
   };
@@ -47,9 +65,9 @@ class App extends Component {
     return (
       <>
         <Form onSubmit={this.handleSubmit}>
-          <label>
+          <Label>
             Name
-            <input
+            <Input
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -59,12 +77,27 @@ class App extends Component {
               value={this.state.name}
               onChange={this.handleChange}
             />
-          </label>
+          </Label>
+          <Label>
+            Phone
+            <Input
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+              placeholder="Enter phone"
+              value={this.state.number}
+              onChange={this.handleChange}
+            />
+          </Label>
           <Button type="submit">Add contact</Button>
         </Form>
         <ul>
-          {this.state.contacts?.map(({ name }) => (
-            <li key={name}>{name}</li>
+          {this.state.contacts?.map(({ name, number }) => (
+            <li key={name}>
+              {name}: {number}
+            </li>
           ))}
         </ul>
       </>
