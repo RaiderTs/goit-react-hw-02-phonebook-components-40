@@ -40,7 +40,7 @@ class App extends Component {
     }));
   };
 
-  addContact = contact => {
+  handleAddContact = contact => {
     this.setState(({ contacts }) => ({
       contacts: [...contacts, contact],
     }));
@@ -51,7 +51,7 @@ class App extends Component {
       <>
         <h1>Phone book</h1>
         <ContactForm
-          addContact={this.addContact}
+          addContact={this.handleAddContact}
           onUnique={this.handleCheckUnique}
         />
         <h2>Contacts</h2>
