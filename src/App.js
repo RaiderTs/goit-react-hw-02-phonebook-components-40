@@ -15,7 +15,7 @@ class App extends Component {
     filter: '',
   };
 
-  onFilterContacts = () => {
+  handleFilterContacts = () => {
     const { contacts } = this.state;
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(this.state.filter.toLowerCase()),
@@ -27,6 +27,19 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
+  handleCheckUnique = name => {
+    const { contacts } = this.state;
+    const onExistContact = contacts.some(contact => contact.name === name);
+    onExistContact && alert(`${name} is already in contacts`);
+    return !onExistContact;
+  };
+
+  handleRemoveContact = id => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   addContact = contact => {
     this.setState(({ contacts }) => ({
       contacts: [...contacts, contact],
@@ -36,11 +49,17 @@ class App extends Component {
   render() {
     return (
       <>
-        <h1>Phonebook</h1>
-        <ContactForm addContact={this.addContact} />
+        <h1>Phone book</h1>
+        <ContactForm
+          addContact={this.addContact}
+          onUnique={this.handleCheckUnique}
+        />
         <h2>Contacts</h2>
         <Filter filter={this.state.filter} onChange={this.handleFilterChange} />
-        <ContactList contacts={this.onFilterContacts()} />
+        <ContactList
+          contacts={this.handleFilterContacts()}
+          onDeleteContact={this.handleRemoveContact}
+        />
       </>
     );
   }

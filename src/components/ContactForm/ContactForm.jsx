@@ -43,12 +43,15 @@ class ContactForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { addContact } = this.props;
+    const { addContact, onUnique } = this.props;
+    if (!onUnique(this.state.name)) return;
+
     const contact = {
       id: this.nameInputId,
       name: this.state.name,
       number: this.state.number,
     };
+
     addContact(contact);
     this.reset();
   };
