@@ -3,7 +3,35 @@ import './App.css';
 import ContactList from './components/ContactList';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
+import swal from 'sweetalert';
+import styled from '@emotion/styled';
 
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  margin: auto;
+  margin-top: 3%;
+  padding-bottom: 35px;
+  max-width: 700px;
+`;
+
+const Title = styled.h1`
+  margin-top: 25px;
+  font-size: 50px;
+  color: #fff;
+  letter-spacing: 4px;
+`;
+
+const SubTitle = styled.h2`
+  margin: 20px 20px;
+  font-size: 40px;
+  color: #fff;
+  letter-spacing: 4px;
+`;
 class App extends Component {
   state = {
     contacts: [
@@ -30,7 +58,12 @@ class App extends Component {
   handleCheckUnique = name => {
     const { contacts } = this.state;
     const onExistContact = contacts.some(contact => contact.name === name);
-    onExistContact && alert(`${name} is already in contacts`);
+    onExistContact &&
+      swal(`${name} is already in contacts!`, {
+        icon: 'error',
+        buttons: false,
+        timer: 2500,
+      });
     return !onExistContact;
   };
 
@@ -48,19 +81,19 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <h1>Phone book</h1>
+      <Section>
+        <Title>Phone book</Title>
         <ContactForm
           addContact={this.handleAddContact}
           onUnique={this.handleCheckUnique}
         />
-        <h2>Contacts</h2>
+        <SubTitle>Contacts</SubTitle>
         <Filter filter={this.state.filter} onChange={this.handleFilterChange} />
         <ContactList
           contacts={this.handleFilterContacts()}
           onDeleteContact={this.handleRemoveContact}
         />
-      </>
+      </Section>
     );
   }
 }

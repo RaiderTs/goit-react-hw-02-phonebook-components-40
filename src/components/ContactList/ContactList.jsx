@@ -1,29 +1,69 @@
 import PropTypes from 'prop-types';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import styled from '@emotion/styled';
+
+const ItemContact = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  color: #fff;
+  width: 500px;
+  height: 50px;
+  background: linear-gradient(to right, #3e5151, #decba4);
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  transition: transform 250ms;
+  &:hover,
+  &:focus {
+    transform: translateX(15px);
+  }
+`;
+
+const List = styled.ul`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const Text = styled.p`
+  color: #fff;
+  font-size: 20px;
+`;
 
 function ContactList({ contacts, onDeleteContact }) {
   return (
-    <div>
-      <ul>
+    <>
+      <List>
         {contacts.length > 0 ? (
           contacts.map(({ id, name, number }) => (
-            <li key={id}>
+            <ItemContact key={id}>
+              <LocalPhoneIcon />
               {name}: {number}
-              <button
+              <IconButton
+                aria-label="delete"
+                color="error"
+                size="large"
                 onClick={() => {
                   onDeleteContact(id);
                 }}
               >
-                Delete
-              </button>
-            </li>
+                <DeleteIcon fontSize="inherit" />
+              </IconButton>
+            </ItemContact>
           ))
         ) : (
-          <p>Phone book is empty</p>
+          <Text>Phone book is empty</Text>
         )}
 
         {}
-      </ul>
-    </div>
+      </List>
+    </>
   );
 }
 
