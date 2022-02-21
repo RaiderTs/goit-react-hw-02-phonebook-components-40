@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/goit-react-hw-02-phonebook-components-40/static/css/main.c85fc0e2.css",
+    "main.js": "/goit-react-hw-02-phonebook-components-40/static/js/main.f604b443.js",
+    "static/media/coffee-g48a9b34d0_1920.jpg": "/goit-react-hw-02-phonebook-components-40/static/media/coffee-g48a9b34d0_1920.8dc1be4db51cced64881.jpg",
+    "index.html": "/goit-react-hw-02-phonebook-components-40/index.html",
+    "main.c85fc0e2.css.map": "/goit-react-hw-02-phonebook-components-40/static/css/main.c85fc0e2.css.map",
+    "main.f604b443.js.map": "/goit-react-hw-02-phonebook-components-40/static/js/main.f604b443.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c85fc0e2.css",
+    "static/js/main.f604b443.js"
+  ]
+}
