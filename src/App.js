@@ -1,37 +1,10 @@
 import { Component } from 'react';
-import './App.css';
+import './App.styled.jsx';
 import ContactList from './components/ContactList';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import swal from 'sweetalert';
-import styled from '@emotion/styled';
-
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 15px;
-  margin: auto;
-  margin-top: 3%;
-  padding-bottom: 35px;
-  max-width: 700px;
-`;
-
-const Title = styled.h1`
-  margin-top: 25px;
-  font-size: 50px;
-  color: #fff;
-  letter-spacing: 4px;
-`;
-
-const SubTitle = styled.h2`
-  margin: 20px 20px;
-  font-size: 40px;
-  color: #fff;
-  letter-spacing: 4px;
-`;
+import { Section, Title, SubTitle } from './App.styled';
 class App extends Component {
   state = {
     contacts: [
